@@ -17,8 +17,10 @@ proc getAssets*(assetsDir: string) :Table[string,string] =
         else:
             result["/" & path] = staticRead(getProjectPath() / assetsDir / path)
 
-
-const assets* = getAssets("assets")
+when defined release:
+    const assets* = getAssets("assets")
+else:
+    let assets* = getAssets("assets")
 
 
 # ----------------------------------------------------------------------
